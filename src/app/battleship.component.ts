@@ -1,6 +1,5 @@
 import { Component, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormControl } from '@angular/forms';
 
 import * as Battleship from '../lib/battleship';
 import { X, Y, add, sub, rot90 } from '../lib/math';
@@ -29,18 +28,17 @@ class Cell {
   styleUrls: ['./battleship.component.scss']
 })
 export class BattleshipComponent {
-  title = 'battleship-client';
-  mode = 'lobby';
-  gameCanvas = null;
-
+  
   whoStarts = 0;
   winner : number | null = null;
   player = 0;
-  playerName = new FormControl('Admiral De Ruyter');
+  mode = 'lobby';
 
   gameDim = [10, 10];
-
   gameBoard : Cell[][] = [];
+
+  shipTypes = Battleship.shipTypes;
+  shipsUsed = Object.fromEntries(Battleship.shipTypes.map((type) => [type.name, false]));
 
   activeCell : number[] | null = null;
   activeShipTemplate : Battleship.ShipTemplate | null = null;
@@ -56,7 +54,6 @@ export class BattleshipComponent {
       }
       this.gameBoard.push(row);
     }
-
   }
 
   ngOnInit() {
@@ -67,6 +64,7 @@ export class BattleshipComponent {
       this.parseState(rawState);
     }
 
+    // For easy debugging
     (window as any).component = this;
   }
 
@@ -159,11 +157,6 @@ export class BattleshipComponent {
     return url.toString();
   }
 
-
-
-  shipTypes = Battleship.shipTypes;
-
-  shipsUsed = Object.fromEntries(Battleship.shipTypes.map((type) => [type.name, false]));
 
   moveCursor(point: number[], cell: Cell) {
     this.activeCell = point;
