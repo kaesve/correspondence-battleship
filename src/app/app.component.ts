@@ -120,4 +120,23 @@ export class AppComponent {
       this.activeShipTemplate = null;
     }
   }
+
+  shipWidth(shipTemplate: Battleship.ShipTemplate) {
+    let min = Infinity, max = -Infinity;
+    shipTemplate.cells.forEach((cell) => {
+      min = Math.min(min, cell[X]);
+      max = Math.max(max, cell[X]);
+    });
+
+    return `calc(var(--unit) * ${1 + max - min})`;
+  }
+  shipHeight(shipTemplate: Battleship.ShipTemplate) {
+    let min = Infinity, max = -Infinity;
+    shipTemplate.cells.forEach((cell) => {
+      min = Math.min(min, cell[Y]);
+      max = Math.max(max, cell[Y]);
+    });
+
+    return `calc(var(--unit) * ${1 + max - min})`;
+  }
 }

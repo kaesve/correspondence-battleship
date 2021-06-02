@@ -303,8 +303,29 @@
     }
   }
 
+  .shipTemplate {
+    display: flex;
+    list-style: none;
+  }
+
   .shipTemplate--used {
     opacity: 0.5;
+  }
+
+  .hullTemplate {
+    --unit: 24px;
+    position: relative;
+    list-style: none;
+    padding: 0; margin: 0;
+    margin-left: calc(2 * var(--unit));
+  }
+
+  .hullCell {
+    position: absolute;
+    padding: 0; margin: 0;
+
+    width: var(--unit);
+    height: var(--unit);
   }
 
   .gameBoard {
@@ -378,6 +399,7 @@
   <ul>
     <li
       *ngFor="let ship of shipTypes; index as y"
+      class="shipTemplate"
       [class]="{
         'shipTemplate--selected': activeShipTemplate?.name == ship.name,
         'shipTemplate--used': shipsUsed[ship.name]
@@ -386,9 +408,16 @@
     >
       
       {{ ship.name }}
-      <ul class="hullTemplate">
-        <li class="hullCell" *ngFor="let cell of ship.cells; index as y" [style]="">
-          {{cell}}
+      <ul class="hullTemplate" [style]="{ width: shipWidth(ship), height: shipHeight(ship) }">
+        <li
+          class="hullCell"
+          *ngFor="let cell of ship.cells; index as y"
+          [style]="{
+            left: 'calc(var(--unit) * ' + cell[0] + ')',
+            top: 'calc(var(--unit) * ' + cell[1] + ')'
+          }"
+        >
+          🚢
         </li>
       </ul>
 
