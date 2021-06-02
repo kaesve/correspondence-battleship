@@ -40,7 +40,7 @@
       <p *ngIf="hasShips()">
         <em>Place your ships on the battlefield.</em>
       </p>
-      <button *ngIf="!hasShips()">
+      <button *ngIf="!hasShips()" (click)="submitPlan()">
         Submit Plan
       </button>
     </aside>
@@ -87,4 +87,53 @@
     </div>
   </section>
 
+</div>
+
+<div class="content content--game" *ngIf="mode === 'game'">
+  <div
+    class="gameBoard"
+    [class]="{
+      'gameBoard--canPut': canPut(),
+      'gameBoard--cannotPut': !canPut() && activeShipTemplate
+    }"
+    (click)="applyAction()"
+    (mouseleave)="activeCell = null"
+  >
+    <ul class="gameRows">
+      <li *ngFor="let row of gameBoard; index as y">
+        <ul class="gameRow">
+          <li
+            class="gameCell"
+            [class]="{'gameCell--active': activeCell != null && activeCell[0] == x && activeCell[1] == y}"
+            *ngFor="let cell of row; index as x" (mouseenter)="moveCursor([ x, y ], cell)"
+          >
+            <span class="waterTile"> 
+              🌊
+            </span>
+            <span
+              class="shipTile"
+              *ngIf="gameBoard[y][x].hasPlayerHit"
+            > 
+              {{ gameBoard[y][x].hasOpponentShip ? '💥' : '💣' }}
+            </span>
+            <span
+              class="shipTile"
+              *ngIf="isFillTarget([ x, y ])"
+            > 
+              🎯
+            </span>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="content content--url" *ngIf="mode === 'url'">
+  <h2>Turn over</h2>
+  <p>
+    Send this url to your opponent: <br />
+
+    <span>{{getStateUrl()}}</span>
+  </p>
 </div>

@@ -1,5 +1,8 @@
 .content {
   --water-color: 119, 209, 231;
+  
+  max-width: calc(100px * var(--unit));
+  margin: calc(2px * var(--unit)) auto;
 }
 
 

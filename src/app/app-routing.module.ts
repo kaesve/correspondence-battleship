@@ -4,8 +4,8 @@ import { BattleshipComponent } from './battleship.component';
 import { LandingComponent } from './landing.component';
 
 const routes: Routes = [
-  { path: 'lobby/:room', component: BattleshipComponent },
-  { path: 'battleship/:room', component: BattleshipComponent },
+  { path: 'battleship', component: BattleshipComponent },
+  { path: 'battleship/:gameState', component: BattleshipComponent },
   { path: '', component: LandingComponent, pathMatch: 'full' },
 ];
 
