@@ -1,6 +1,4 @@
-import { X, Y, add, sub, mul, div } from './math';
-
-
+import { sub, } from './math';
 
 export class ShipTemplate {
   constructor(public name: string, public cells: number[][]) {
@@ -37,21 +35,3 @@ export const shipTypes : ShipTemplate[] = [
   ShipTemplate.Parse('Submarine', `xoxxx`),
   ShipTemplate.Parse('Destroyer', `ox`),
 ];
-
-
-class GameState {
-  constructor(
-    public turn: number,
-    public player: number,
-    public playerShips: boolean[][],
-    public opponentShips: boolean[][],
-    public playerHits: boolean[][],
-    public opponentHits: boolean[][],
-  ) { }
-
-  public applyMove() {
-    
-  }
-}
-
-// const createGame = ()

@@ -15,6 +15,17 @@
 
 }
 
+h1 {
+  color: white;
+  margin: calc(1px * var(--unit)) calc(4px * var(--unit));
+}
+
+p {
+  max-width: 60ch;
+}
+p:not(:last-child) {
+  margin-bottom: 1.5em;
+}
 
 button {
   padding: calc(0.5px * var(--unit)) calc(1.5px * var(--unit)) calc(0.75px * var(--unit));
@@ -30,4 +41,13 @@ input, select {
   border-radius: 2px;
 
   padding: calc(0.25px * var(--unit)) calc(1px * var(--unit));
+}
+
+.content {
+  max-width: calc(100px * var(--unit));
+  margin: calc(2px * var(--unit)) auto;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
 }

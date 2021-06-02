@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormControl } from '@angular/forms';
 
 import * as Battleship from '../lib/battleship';
-import { X, Y, add, sub, mul, div, rot90 } from '../lib/math';
+import { X, Y, add, sub, rot90 } from '../lib/math';
 
 
 const applyRotation = (p: number[], rotations: number) => {

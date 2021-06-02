@@ -1,9 +1,7 @@
 .content {
-  --water-color: 119, 209, 231;
-  
-  max-width: calc(100px * var(--unit));
-  margin: calc(2px * var(--unit)) auto;
+  --water-color: 119, 209, 231; 
 }
+
 
 
 .shipTemplate {
@@ -54,6 +52,9 @@
   --side: 24px;
   user-select: none;
 }
+.gameBoard--small {
+  --side: 12px;
+}
 .gameBoard ul,
 .gameBoard li {
   list-style: none;
@@ -73,8 +74,13 @@
   background: rgb(var(--water-color));
   /* border: 1px solid red; */
   margin: .5px;
+  font-size: calc(0.6 * var(--side));
+
 
   text-align: center;
+}
+.gameBoard--small li.gameCell {
+  margin: 0;
 }
 .gameCell--active {
   background: green;
@@ -86,7 +92,7 @@
   width: 100%; height: 100%;
   background: #22558766;
   
-  font-size: 1.2em;
+  font-size: calc(0.7 * var(--side));
 }
 .shipTile--planned {
   opacity: 0.5;
@@ -109,8 +115,8 @@
 }
 
 
-.lobbyContainer {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
+.stateUrl {
+  display: inline-block;
+  word-break: break-all;
+  max-width: 50ch;
 }
