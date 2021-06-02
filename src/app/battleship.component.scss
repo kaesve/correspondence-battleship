@@ -1,0 +1,113 @@
+.content {
+  --water-color: 119, 209, 231;
+}
+
+
+.shipTemplate {
+  display: flex;
+  list-style: none;
+  cursor: pointer;
+  border-radius: 4px;
+
+  transition: background-color .2s ease;
+}
+
+.shipTemplate--selected {
+  background: rgba(var(--water-color), .5);
+}
+.shipTemplate--used {
+  opacity: 0.5;
+}
+
+.shipName {
+  width: 5em;
+  vertical-align: bottom;
+  align-self: center;
+  margin: 0 calc(1px * var(--unit));
+}
+
+.hullTemplate {
+  --unit: 24px;
+  position: relative;
+  list-style: none;
+  padding: 0; margin: 0;
+  margin-left: calc(2 * var(--unit));
+}
+
+.hullCell {
+  position: absolute;
+  padding: 0; margin: 0;
+
+  width: var(--unit);
+  height: var(--unit);
+}
+
+.instruction {
+  margin-top: calc(2px * var(--unit));
+}
+
+
+.gameBoard {
+  --side: 24px;
+  user-select: none;
+}
+.gameBoard ul,
+.gameBoard li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+.gameRow {
+  display: flex;
+}
+
+.gameBoard li.gameCell {
+  position: relative;
+  width: var(--side);
+  height: var(--side);
+  background: rgb(var(--water-color));
+  /* border: 1px solid red; */
+  margin: .5px;
+
+  text-align: center;
+}
+.gameCell--active {
+  background: green;
+}
+
+.shipTile {
+  position: absolute;
+  left: 0;
+  width: 100%; height: 100%;
+  background: #22558766;
+  
+  font-size: 1.2em;
+}
+.shipTile--planned {
+  opacity: 0.5;
+  background: salmon;
+  text-align: center;
+}
+.gameBoard--canPut {
+  cursor: grabbing;
+}
+.gameBoard--cannotPut {
+  cursor: not-allowed;
+}
+.gameBoard--canPut .shipTile--planned {
+  opacity: 1;
+  background: #ffffffaa;
+}
+
+.waterTile {
+  opacity: .7;
+}
+
+
+.lobbyContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}

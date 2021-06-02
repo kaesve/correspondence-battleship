@@ -1,0 +1,90 @@
+
+
+<div class="content lobbyContainer" role="main" *ngIf="mode == 'lobby'">
+
+  <section class="lobbyFleet">
+    <label>
+      🎖 <input type="text" [formControl]="playerName" />
+    </label>
+    <h3>Your fleet</h3>
+    <ul>
+      <li
+        *ngFor="let ship of shipTypes; index as y"
+        class="shipTemplate"
+        [class]="{
+          'shipTemplate--selected': activeShipTemplate?.name == ship.name,
+          'shipTemplate--used': shipsUsed[ship.name]
+        }"
+        (click)="selectShip(ship)"
+      >
+        
+        <span class="shipName">{{ ship.name }}</span>
+        <ul class="hullTemplate" [style]="{ width: shipWidth(ship), height: shipHeight(ship) }">
+          <li
+            class="hullCell"
+            *ngFor="let cell of ship.cells; index as y"
+            [style]="{
+              left: 'calc(var(--unit) * ' + cell[0] + ')',
+              top: 'calc(var(--unit) * ' + cell[1] + ')'
+            }"
+          >
+            🚢
+          </li>
+        </ul>
+  
+      </li>
+
+    </ul>
+
+    <aside class="instruction">
+      <p *ngIf="hasShips()">
+        <em>Place your ships on the battlefield.</em>
+      </p>
+      <button *ngIf="!hasShips()">
+        Submit Plan
+      </button>
+    </aside>
+  </section>
+
+  <section class="lobbyBoard">
+    <h3>Plan</h3>
+    <div style="display: flex;">
+      Rotate:
+      <button (click)="rotate(-1)">↶</button>
+      <button (click)="rotate(1)">↷</button>
+    </div>
+  
+    <div
+      class="gameBoard"
+      [class]="{
+        'gameBoard--canPut': canPut(),
+        'gameBoard--cannotPut': !canPut() && activeShipTemplate
+      }"
+      (click)="applyAction()"
+      (mouseleave)="activeCell = null"
+    >
+      <ul class="gameRows">
+        <li *ngFor="let row of gameBoard; index as y">
+          <ul class="gameRow">
+            <li
+              class="gameCell"
+              [class]="{'gameCell--active': activeCell != null && activeCell[0] == x && activeCell[1] == y}"
+              *ngFor="let cell of row; index as x" (mouseenter)="moveCursor([ x, y ], cell)"
+            >
+              <span class="waterTile"> 
+                🌊
+              </span>
+              <span
+                class="shipTile" [class]="{ 'shipTile--planned': isFillTarget([ x, y ]) }"
+                *ngIf="gameBoard[y][x].hasPlayerShip || isFillTarget([ x, y ])"
+              > 
+                🚢
+              </span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</div>
